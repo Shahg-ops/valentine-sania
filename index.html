@@ -18,8 +18,8 @@
     }
 
     .card {
-        background: rgba(255,255,255,0.15);
-        backdrop-filter: blur(10px);
+        background: rgba(255,255,255,0.18);
+        backdrop-filter: blur(12px);
         padding: 40px;
         border-radius: 25px;
         text-align: center;
@@ -51,29 +51,19 @@
     }
 
     button {
-        padding: 12px 22px;
-        font-size: 1rem;
+        padding: 14px 28px;
+        font-size: 1.1rem;
         border: none;
         border-radius: 30px;
         cursor: pointer;
-        margin: 8px;
+        background: #ff2e63;
+        color: white;
         transition: 0.3s;
     }
 
-    .yes {
-        background: #ff2e63;
-        color: white;
-    }
-
-    .yes:hover {
-        transform: scale(1.1);
+    button:hover {
         background: #ff1744;
-    }
-
-    .no {
-        background: #ffffff;
-        color: #ff2e63;
-        position: relative;
+        transform: scale(1.1);
     }
 
     .heart {
@@ -93,16 +83,13 @@
         from {opacity: 0; transform: translateY(20px);}
         to {opacity: 1; transform: translateY(0);}
     }
-
-    audio {
-        display: none;
-    }
 </style>
 </head>
 
 <body>
 
-<audio autoplay loop>
+<!-- 🎵 Background Music (Starts on YES click) -->
+<audio id="bgMusic" loop>
     <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
 </audio>
 
@@ -116,17 +103,21 @@
     </p>
 
     <div class="question">
-        Will you be my Valentine? 💌
+        You are already my Valentine 💌<br>
+        Just click YES ❤️
     </div>
 
     <div class="buttons">
-        <button class="yes" onclick="yesClick()">Yes 💖</button>
-        <button class="no" onmouseover="moveButton(this)">No 🙈</button>
+        <button onclick="yesClick()">Yes 💖</button>
     </div>
 </div>
 
 <script>
 function yesClick() {
+    const music = document.getElementById("bgMusic");
+    music.volume = 0.4;   // soft romantic volume
+    music.play();
+
     alert(
         "Sania ❤️\n\n" +
         "Thank you for choosing me.\n" +
@@ -134,12 +125,6 @@ function yesClick() {
         "and annoy you forever 😄\n\n" +
         "Happy Valentine’s Day 💕"
     );
-}
-
-function moveButton(btn) {
-    btn.style.position = "absolute";
-    btn.style.top = Math.random() * 80 + "%";
-    btn.style.left = Math.random() * 80 + "%";
 }
 
 function createHeart() {
